@@ -10,7 +10,9 @@ RSpec.describe SearchController, :type => :controller do
     end
 
     it "searches for videos if parameters given" do
-      get 'index', q: "Beastie Boys Sabotage"
+      VCR.use_cassette('video_search') do
+        get 'index', q: "Beastie Boys Sabotage"
+      end
       results = assigns(:results)
       expect(results).to_not be_nil
     end

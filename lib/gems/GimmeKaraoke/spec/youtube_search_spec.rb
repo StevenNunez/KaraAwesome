@@ -20,6 +20,22 @@ module GimmeKaraoke
       expect(song.embed_url).to eq('//www.youtube.com/embed/UU5lmKgyE7U')
     end
 
+    it "returns attributes" do
+      results = nil
+      VCR.use_cassette('video_search') do
+        results = YoutubeSearch.search("Beastie Boys Sabotage")
+      end
+      song = results.first
+      attributes = {
+        :title=>"Beastie Boys - Sabotage Karaoke",
+        :url=>"https://www.youtube.com/v/UU5lmKgyE7U?version=3&f=videos&app=youtube_gdata",
+        :thumbnails=>["http://i.ytimg.com/vi/UU5lmKgyE7U/1.jpg", "http://i.ytimg.com/vi/UU5lmKgyE7U/2.jpg", "http://i.ytimg.com/vi/UU5lmKgyE7U/3.jpg"],
+        :embed_url=>"//www.youtube.com/embed/UU5lmKgyE7U",
+        :uid=>"UU5lmKgyE7U"
+        }
+      expect(song.attributes).to eq(attributes)
+    end
+
     it "returns nil if there aren't any results" do
       results = nil
       VCR.use_cassette('no_results') do

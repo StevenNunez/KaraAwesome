@@ -1,5 +1,4 @@
 module GimmeKaraoke
-  YoutubeResult = Struct.new(:title, :url, :thumbnails, :embed_url, :uid)
   class YoutubeSearch
     def initialize(raw_query)
       @raw_query = raw_query

@@ -4,6 +4,7 @@ module GimmeKaraoke
     def initialize(song)
       @song = song
     end
+
     def title
       @title ||= song.fetch("title").fetch("$t")
     end
@@ -22,6 +23,16 @@ module GimmeKaraoke
 
     def uid
       @uid ||= song["id"].fetch("$t").split(':').last
+    end
+
+    def attributes
+      {
+        title: title,
+        url: url,
+        thumbnails: thumbnails,
+        embed_url: embed_url,
+        uid: uid
+      }
     end
   end
 end
