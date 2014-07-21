@@ -13,6 +13,7 @@ module GimmeKaraoke
         results = YoutubeSearch.search("Beastie Boys Sabotage")
       end
       song = results.first
+      expect(song.uid).to eq('UU5lmKgyE7U')
       expect(song.title).to match(/karaoke/i)
       expect(song.url).to match(/youtube.com/)
       expect(song.thumbnails).to eq(["http://i.ytimg.com/vi/UU5lmKgyE7U/1.jpg", "http://i.ytimg.com/vi/UU5lmKgyE7U/2.jpg", "http://i.ytimg.com/vi/UU5lmKgyE7U/3.jpg"])

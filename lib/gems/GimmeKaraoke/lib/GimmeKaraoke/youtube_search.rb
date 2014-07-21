@@ -1,5 +1,5 @@
 module GimmeKaraoke
-  YoutubeResult = Struct.new(:title, :url, :thumbnails, :embed_url)
+  YoutubeResult = Struct.new(:title, :url, :thumbnails, :embed_url, :uid)
   class YoutubeSearch
     def initialize(raw_query)
       @raw_query = raw_query
@@ -23,39 +23,13 @@ module GimmeKaraoke
 
     def items(result)
       result.map do |song|
-        item(song)
+        YoutubeResult.new(song)
       end
-    end
-
-    def item(song)
-      title = get_title(song)
-      url = get_url(song)
-      thumbnails = get_thumbnails(song)
-      embed_url = get_embed_url(song)
-      YoutubeResult.new(title, url, thumbnails, embed_url)
     end
 
     def run_query(query)
       res = RestClient.get("https://gdata.youtube.com/feeds/api/videos?q=#{query}&alt=json&v=2")
       JSON.parse(res)
-    end
-
-    def get_title(song)
-      song.fetch("title").fetch("$t")
-    end
-
-    def get_url(song)
-      song.fetch("content").fetch("src")
-    end
-
-    def get_thumbnails(song)
-      song_id = song["id"].fetch("$t").split(':').last
-      1.upto(3).map{|tn| "http://i.ytimg.com/vi/#{song_id}/#{tn}.jpg"}
-    end
-
-    def get_embed_url(song)
-      song_id = song["id"].fetch("$t").split(':').last
-      "//www.youtube.com/embed/#{song_id}"
     end
 
     def karaokeize(query)
