@@ -1,0 +1,14 @@
+<h1>Search Results for: <%= @query %></h1>
+<%= form_tag root_path, method: :get, class: "search" do %>
+<fieldset>
+  <legend></legend>
+  <%= label_tag :q, "Search again" %>
+  <%= text_field_tag :q %>
+  <%= submit_tag "Get awesomeness" %>
+</fieldset>
+<% end %>
+<% if @results %>
+  <%= render partial: 'results', locals: {results: @results} %>
+<% else %>
+  No results for "<%= @query %>". Try again?
+<% end %>

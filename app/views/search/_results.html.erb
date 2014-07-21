@@ -1,0 +1,5 @@
+<% results.each do |result| %>
+  <div>
+    <%= link_to result.title, result.url %>
+    <%= image_tag result.thumbnails.first %>
+<% end %>

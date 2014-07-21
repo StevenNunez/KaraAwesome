@@ -1,0 +1,10 @@
+<h1>Welcome to KaraAwesome</h1>
+<%= form_tag root_path, method: :get, class: "search" do %>
+<fieldset>
+  <legend>Find awesome Karaoke songs</legend>
+  <%= label_tag :q, "Enter your query" %>
+  <%= text_field_tag :q %>
+  <%= submit_tag "Get awesomeness" %>
+</fieldset>
+<% end %>
+<%= render partial: 'results', locals: {results: @results} if @results %>
