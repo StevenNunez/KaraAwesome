@@ -16,6 +16,7 @@ module GimmeKaraoke
       expect(song.title).to match(/karaoke/i)
       expect(song.url).to match(/youtube.com/)
       expect(song.thumbnails).to eq(["http://i.ytimg.com/vi/UU5lmKgyE7U/1.jpg", "http://i.ytimg.com/vi/UU5lmKgyE7U/2.jpg", "http://i.ytimg.com/vi/UU5lmKgyE7U/3.jpg"])
+      expect(song.embed_url).to eq('//www.youtube.com/embed/UU5lmKgyE7U')
     end
 
     it "returns nil if there aren't any results" do

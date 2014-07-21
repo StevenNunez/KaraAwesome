@@ -4,5 +4,8 @@
     <header class='song-title'><%= link_to result.title, result.url %></header>
     <%= image_tag result.thumbnails.first %>
   </article>
+  <iframe width="420" height="315" src="<%= result.embed_url %>" frameborder="0" allowfullscreen></iframe>
   <% end %>
 </section>
+
+https://www.youtube.com/v/NYbcKwCzOZM?version=3&f=videos&app=youtube_gdata

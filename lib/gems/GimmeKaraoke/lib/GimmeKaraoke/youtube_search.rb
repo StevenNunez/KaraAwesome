@@ -1,9 +1,8 @@
 module GimmeKaraoke
-  YoutubeResult = Struct.new(:title, :url, :thumbnails)
+  YoutubeResult = Struct.new(:title, :url, :thumbnails, :embed_url)
   class YoutubeSearch
-    def initialize(raw_query, source: :youtube)
+    def initialize(raw_query)
       @raw_query = raw_query
-      @source = source
     end
 
     def query
@@ -32,7 +31,8 @@ module GimmeKaraoke
       title = get_title(song)
       url = get_url(song)
       thumbnails = get_thumbnails(song)
-      YoutubeResult.new(title, url, thumbnails)
+      embed_url = get_embed_url(song)
+      YoutubeResult.new(title, url, thumbnails, embed_url)
     end
 
     def run_query(query)
@@ -51,6 +51,11 @@ module GimmeKaraoke
     def get_thumbnails(song)
       song_id = song["id"].fetch("$t").split(':').last
       1.upto(3).map{|tn| "http://i.ytimg.com/vi/#{song_id}/#{tn}.jpg"}
+    end
+
+    def get_embed_url(song)
+      song_id = song["id"].fetch("$t").split(':').last
+      "//www.youtube.com/embed/#{song_id}"
     end
 
     def karaokeize(query)
