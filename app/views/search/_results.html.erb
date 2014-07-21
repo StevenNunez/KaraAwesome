@@ -1,5 +1,8 @@
-<% results.each do |result| %>
-  <div>
-    <%= link_to result.title, result.url %>
+<section class="row">
+  <% results.each do |result| %>
+  <article class='col-xs-6 col-md-3'>
+    <header class='song-title'><%= link_to result.title, result.url %></header>
     <%= image_tag result.thumbnails.first %>
-<% end %>
+  </article>
+  <% end %>
+</section>

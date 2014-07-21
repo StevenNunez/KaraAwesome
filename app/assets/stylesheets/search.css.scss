@@ -10,3 +10,14 @@
     display: block;
   }
 }
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.song-title{
+  @extend .truncate
+}
