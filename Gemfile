@@ -21,11 +21,13 @@ group :development do
 end
 
 # Testing
-group :development, :test do
-  gem 'rspec-rails', '~> 3.0.0'
+group :test do
   gem 'factory_girl'
   gem 'vcr'
   gem 'webmock'
+end
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0'
 end
 
 # Local Gems
