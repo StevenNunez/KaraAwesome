@@ -7,8 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body class='container'>
+  <div>
+    <%= link_to "KaraAwesome", root_path %>
+  </div>
+  <% if signed_in? %>
+  <%= link_to "My Playlist", current_user.playlists.first %> | <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+  <% else %>
+  <%= link_to "Sign in", new_user_session_path %> or <%= link_to "Sign up", new_user_registration_path %> To create an awesome playlist
+  <% end %>
+  <p class="alerts"><%= notices %></p>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>

@@ -4,7 +4,7 @@
   </div>
 
   <% @playlist.selections.each.with_index(1) do |selection, i| %>
-  <div data-id='<%= selection.id %>' class="col-xs-3">
+  <div data-id='<%= selection.id %>' class="col-xs-6">
     <%= element_for_selection(selection, i) %>
   </div>
   <% end %>

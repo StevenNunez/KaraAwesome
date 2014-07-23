@@ -45,8 +45,12 @@ module GimmeKaraoke
     end
 
     it "returns only songs that allow embedding" do
-      pending 'Only return videos that have ["yt$accessControl"] {"action"=>"embed", "permission"=>"allowed"}'
-      fail
+      results = nil
+      VCR.use_cassette('restricted_video') do
+        results = YoutubeSearch.search('single ladies')
+      end
+
+      expect(results.count).to be(23)
     end
   end
 end

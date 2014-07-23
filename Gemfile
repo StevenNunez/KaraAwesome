@@ -10,6 +10,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
+gem 'devise', '~> 3.2.4'
+
+# Styling
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 
@@ -26,6 +29,7 @@ group :test do
   gem 'vcr'
   gem 'webmock'
 end
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
 end

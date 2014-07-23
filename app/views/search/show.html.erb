@@ -1,5 +1,8 @@
 <h1>Search Results for: <%= @query %></h1>
-<%= link_to "Playlist", Playlist.first %>
+<% if signed_in? %>
+  <%= link_to "Playlist", @playlist %>
+<% end %>
+
 <%= form_tag root_path, method: :get, class: "search" do %>
 <fieldset>
   <legend></legend>

@@ -5,6 +5,5 @@
     <%= image_tag result.thumbnails.first %>
     <%= link_to "Add to playlist #{@playlist.name}", playlist_path(@playlist, song: result.uid), method: :patch, remote: true, class: "add-to-playlist" %>
   </article>
-
   <% end %>
 </section>

@@ -21,7 +21,7 @@ module GimmeKaraoke
     private
 
     def items(result)
-      result.map do |song|
+      result.reject{|song| song['yt$accessControl'].include?({"action"=>"embed", "permission"=>"denied"})}.map do |song|
         YoutubeResult.new(song)
       end
     end
