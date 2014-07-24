@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  $('.add-to-playlist').on 'ajax:error', (event, xhr, status, foo) ->
+  $('.add-to-playlist').on 'ajax:error', (event, xhr, status) ->
     if status  is 'error'
       error = """
         <div class="alert alert-danger alert-dismissible" role="alert">
