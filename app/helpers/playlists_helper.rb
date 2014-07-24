@@ -5,7 +5,10 @@ module PlaylistsHelper
       content_tag(:div) do
         image_tag(song.thumbnails.first, class: 'img-responsive')
       end +
-      "#{index}. #{selection.song.title}"
+      "#{index}. #{selection.song.title}" +
+      content_tag(:div) do
+        link_to "Remove from Playlist", selection, remote: true, method: :delete, class: 'remove-from-playlist'
+      end
     end.html_safe
   end
 end

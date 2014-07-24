@@ -6,11 +6,11 @@ RSpec.describe SelectionsController, :type => :controller do
       michael = User.create(email: "mnunez@example.com", password: "I love cats")
       sign_in michael
 
-      playlist = Playlist.create
-      playlist.user = michael
+      playlist = michael.playlists.create
       selection = playlist.selections.create
       expect do
         delete 'destroy', id: selection.id
+        expect(response.body).to eq(selection.id.to_s)
       end.to change {Selection.count}.by(-1)
     end
 
@@ -19,7 +19,7 @@ RSpec.describe SelectionsController, :type => :controller do
 
       steve = User.create(email: "snunez@example.com", password: "I love Dags")
       sign_in michael
-      
+
       playlist = Playlist.create
       playlist.user = steve
       selection = playlist.selections.create
