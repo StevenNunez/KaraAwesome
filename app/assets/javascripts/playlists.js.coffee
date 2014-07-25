@@ -29,13 +29,13 @@ $ ->
     player = new YT.Player 'player',
       videoId: $('#player').data('current-id')
       events:
-        'onReady': window.onPlayerReady
-        'onStateChange': window.onPlayerStateChange
+        'onReady': onPlayerReady
+        'onStateChange': onPlayerStateChange
 
-  window.onPlayerReady = (event) ->
+  onPlayerReady = (event) ->
     event.target.playVideo()
 
-  window.onPlayerStateChange = (event) ->
+  onPlayerStateChange = (event) ->
     if event.data is YT.PlayerState.ENDED
       removeAndPlayNext(current_selection())
 
