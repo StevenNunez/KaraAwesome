@@ -11,4 +11,12 @@ $ ->
           You must <a href='/users/sign_in' class="alert-link">Log in</a> to add stuff to a playlist
         </div>
        """
-    $('.alerts').append(error);
+    $('.alerts').append(error)
+  .on 'ajax:success', (e, playlist)->
+    success = """
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        #{playlist.song.title} has been added to #{playlist.name}
+      </div>
+      """
+    $('.alerts').append(success)

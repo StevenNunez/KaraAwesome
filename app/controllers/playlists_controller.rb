@@ -10,9 +10,10 @@ class PlaylistsController < ApplicationController
   end
 
   def update
-    song = Song.find_by uid: params[:song]
+    @song = Song.find_by uid: params[:song]
     @playlist = current_user.playlists.find params[:id]
-    @playlist.add_song song
+    @playlist.add_song @song
+
     respond_to do |format|
       format.json {render 'playlist'}
     end
