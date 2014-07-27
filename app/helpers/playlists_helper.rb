@@ -8,6 +8,9 @@ module PlaylistsHelper
       "#{index}. #{selection.song.title}" +
       content_tag(:div) do
         link_to "Remove from Playlist", selection, remote: true, method: :delete, class: 'remove-from-playlist'
+      end +
+      content_tag(:div) do
+        link_to "Love this song!", reputation_path(song_id: selection.song.id), method: :patch, remote: true
       end
     end.html_safe
   end

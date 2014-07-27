@@ -2,6 +2,7 @@
   <% results.each do |result| %>
   <article class='col-xs-6 col-md-3'>
     <header class='song-title'><%= link_to result.title, result.url %></header>
+    Song reputation: <%= result.reputation %>
     <%= image_tag result.thumbnails.first %>
     <%= link_to "Add to playlist #{@playlist.name}", playlist_path(@playlist, song: result.uid), method: :patch, remote: true, class: "add-to-playlist" %>
   </article>

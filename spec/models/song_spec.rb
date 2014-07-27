@@ -17,7 +17,7 @@ RSpec.describe Song, :type => :model do
     rs = RemoteSong.new("A Title", "http://example.com", ['t1', 't2'], "Embedded", "123")
     remote_source = RemoteSource.new([rs])
 
-    songs = Song.from_remote('bogus', remote_source)
+    songs = Song.from_remote('a query', remote_source)
     expect(songs.count).to eq(1)
     song = songs.first
     expect(song.id).to_not be_nil
@@ -32,15 +32,28 @@ RSpec.describe Song, :type => :model do
     rs = RemoteSong.new("A Title", "http://example.com", ['t1', 't2'], "Embedded", "123")
     remote_source = RemoteSource.new(nil)
 
-    expect(Song.from_remote('bogus', remote_source)).to be_nil
+    expect(Song.from_remote('a query', remote_source)).to be_nil
   end
 
   it "finds songs if they are already persisted" do
     rs = RemoteSong.new("A Title", "http://example.com", ['t1', 't2'], "Embedded", "123")
     remote_source = RemoteSource.new([rs])
 
-    songs = Song.from_remote('bogus', remote_source)
-    expect{Song.from_remote('bogus', remote_source)}.to_not change{Song.count}
-    expect(Song.from_remote('bogus', remote_source).first.id).to eq(songs.first.id)
+    songs = Song.from_remote('a query', remote_source)
+    expect{Song.from_remote('a query', remote_source)}.to_not change{Song.count}
+    expect(Song.from_remote('a query', remote_source).first.id).to eq(songs.first.id)
+  end
+
+  it "Sorts songs by reputation regardless of query result order" do
+    meh_song = Song.create(uid: 'meh_song')
+    good_song = Song.create(reputation: 2, uid: 'good_song')
+    great_song = Song.create(reputation: 10, uid: 'great_song')
+
+    remote_meh_song = RemoteSong.new("A Title", "http://example.com", ['t1', 't2'], "Embedded", "meh_song")
+    remote_good_song = RemoteSong.new("A Title", "http://example.com", ['t1', 't2'], "Embedded", "good_song")
+    remote_great_song = RemoteSong.new("A Title", "http://example.com", ['t1', 't2'], "Embedded", "great_song")
+    remote_source = RemoteSource.new([good_song, meh_song, great_song])
+    songs = Song.from_remote('a query', remote_source)
+    expect(songs).to eq([great_song, good_song, meh_song])
   end
 end
